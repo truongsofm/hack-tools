@@ -77,19 +77,19 @@ class RunConsole {
 		PROCESS_INFORMATION processInfo;
 		String cmd = Environment.CommandLine.Substring(Args0.Length).Trim();// quoted parameter : accepted
 		if(cmd.Length==0){
-			Console.WriteLine("Usage : <{0}> <cmd>", Args0);
+			Console.WriteLine("usage : <{0}> <cmd>", Args0);
 			return 0;
 		}
 		if (CreateProcessAsUser(hToken, null, cmd, ref saProcessAttributes, ref saThreadAttributes, false, (uint)(0 | 0x00000400)/*CREATE_UNICODE_ENVIRONMENT*/, lpEnvironment, null, ref startupInfo, out processInfo))
 		{
-			Console.WriteLine("PID : "+processInfo.dwProcessId);
+			Console.WriteLine("pid : "+processInfo.dwProcessId);
 		}
 		else {
-			Console.WriteLine("`nt authority\\system` required");
+			Console.WriteLine("administrative privileges required");
 		}
 	}
 	catch(Exception e){
-		Console.WriteLine("Got Exception "+e.GetType().Name);
+		Console.WriteLine("got exception "+e.GetType().Name);
 	}
 	return 0;
 	}
@@ -100,7 +100,7 @@ https://www.nuget.org/packages/Microsoft.Net.Compilers
 
 ##### Notice
 
-- This application must be run with Administrator Privilege
+- Administrative privileges **required**
 - You can get Terminal Session ID by using `quser` ,`qwinsta` ,`tasklist`, ... and change `SessionId` accordingly
 
 ##### Credit 
