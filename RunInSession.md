@@ -1,5 +1,4 @@
 Run program in other Windows Terminal Session 
-... document almost done
 ```C#
 using System;
 using System.ComponentModel;
@@ -8,13 +7,10 @@ using System.Runtime.InteropServices;
 class RunConsole {
 	[DllImport("kernel32.dll")]
 	static extern uint WTSGetActiveConsoleSessionId();
-	
 	[DllImport("wtsapi32.dll", SetLastError=true)]
 	static extern bool WTSQueryUserToken(UInt32 sessionId, out IntPtr Token);
-	
 	[DllImport("userenv.dll", SetLastError=true)]
 	static extern bool CreateEnvironmentBlock(out IntPtr lpEnvironment, IntPtr hToken, bool bInherit);
-	
 	[DllImport("advapi32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
 	static extern bool CreateProcessAsUser(
 		IntPtr hToken,
@@ -36,7 +32,6 @@ class RunConsole {
 		public IntPtr lpSecurityDescriptor;
 		public int bInheritHandle;
 	}
-
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct PROCESS_INFORMATION
 	{
@@ -45,7 +40,6 @@ class RunConsole {
 		public int dwProcessId;
 		public int dwThreadId;
 	}
-
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 	struct STARTUPINFO
 	{
@@ -101,5 +95,13 @@ class RunConsole {
 	}
 }
 ```
+##### Compile
+https://www.nuget.org/packages/Microsoft.Net.Compilers
 
-Credit : [Grawity](https://gist.github.com/grawity/871048)
+##### Notice
+
+- This application must be run with Administrator Privilege
+- You can get Terminal Session ID by using `quser` ,`qwinsta` ,`tasklist`, ... and change `SessionId` accordingly
+
+##### Credit 
+[Grawity](https://gist.github.com/grawity/871048)
