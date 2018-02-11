@@ -1,2 +1,2 @@
 # hack-tools
-Personal collect hacking tools
+Personal collection of hacking tools 
