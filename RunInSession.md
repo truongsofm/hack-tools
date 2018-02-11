@@ -89,26 +89,13 @@ class RunConsole {
 		INHERIT_PARENT_AFFINITY				= 0x00010000,
 	}
 	
-	static int Main(string[] argv)
+	static int Main()
 	{
+	string Args0 = Environment.GetCommandLineArgs()[0];
 	try {
-		string cwd = Environment.CurrentDirectory;
-		// string appName = argv[0];
-		// if (appName.Length == 0)
-		// {
-		// 	throw new InvalidOperationException("Application not specified.");
-		// }
-		// TODO: Deal with quoted args, etc.
-		// For now, good enough to start a .cmd script.
-		//string commandLine = String.Join(" ", argv);
-		
-		//uint sessionId = WTSGetActiveConsoleSessionId();		
-		// if (sessionId == 0xFFFFFFFF)
-		// {
-		// 	throw new InvalidOperationException("No session attached to the physical console.");
-		// }
-
-		IntPtr hToken; WTSQueryUserToken(1, out hToken);/*session id : 5*/
+		uint ConsoleSessionId = WTSGetActiveConsoleSessionId();// 1 by default
+		uint SessionId = 1;
+		IntPtr hToken; WTSQueryUserToken(SessionId, out hToken);
 		IntPtr lpEnvironment; CreateEnvironmentBlock(out lpEnvironment, hToken, false);
 		SECURITY_ATTRIBUTES saProcessAttributes = new SECURITY_ATTRIBUTES();
 		SECURITY_ATTRIBUTES saThreadAttributes = new SECURITY_ATTRIBUTES();
@@ -116,16 +103,21 @@ class RunConsole {
 		PROCESS_INFORMATION processInfo;
 		CreateProcessFlags flags = 0;
 		flags |= CreateProcessFlags.CREATE_UNICODE_ENVIRONMENT;//!importaint
-		if (CreateProcessAsUser(hToken, null, "C:\\windows\\system32\\notepad.exe",	ref saProcessAttributes, ref saThreadAttributes, false, (uint)flags, lpEnvironment, null, ref startupInfo, out processInfo))
+		String cmd = Environment.CommandLine.Substring(Args0.Length).Trim();//work with quoted parameter
+		if(cmd.Length==0){
+			Console.WriteLine("Usage : <{0}> <cmd>", Args0);
+			return 0;
+		}
+		if (CreateProcessAsUser(hToken, null, cmd, ref saProcessAttributes, ref saThreadAttributes, false, (uint)flags, lpEnvironment, null, ref startupInfo, out processInfo))
 		{
-			Console.WriteLine("Pid = {0}", processInfo.dwProcessId);
+			Console.WriteLine("PID = "+processInfo.dwProcessId);
 		}
 		else {
-			Console.WriteLine("`nt authority\system` required");
+			Console.WriteLine("`nt authority\\system` required");
 		}
 	}
 	catch(Exception e){
-		Console.WriteLine("Got an Exception ! GG");
+		Console.WriteLine("Got Exception "+e.GetType().Name);
 	}
 	return 0;
 	}
