@@ -87,21 +87,18 @@ class RunConsole {
 		Console.WriteLine("Pid : "+processInfo.dwProcessId);
 	}
 	catch(Exception e){
-		Console.WriteLine("Exception "+e.GetType().Name);
+		Console.WriteLine("Exception : "+e.GetType().Name);
 	}
 	return 0;
 	}
 }
-/*
-sc config AxInstSV binpath= "C:\Users\h4x0r\Desktop\fuck.exe notepad.exe" type= own start= auto DisplayName= "ActiveX Installer (AxInstSV)"
-*/
 ```
 ##### Compile
 https://www.nuget.org/packages/Microsoft.Net.Compilers
 
 ##### Notice
 
-- Administrative privileges **required**
+- `nt authority\system` **required**
 - You can get Terminal Session ID by using `quser` ,`qwinsta` ,`tasklist`, ... and change `SessionId` accordingly
 
 ##### Credit 
