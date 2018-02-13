@@ -1,4 +1,4 @@
-Run program in other Windows Terminal Session 
+Run program in other Windows Terminal Session ~ `runas`
 ```C#
 using System;
 using System.ComponentModel;
