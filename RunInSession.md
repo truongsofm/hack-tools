@@ -80,7 +80,7 @@ class RunConsole {
 			Console.WriteLine("Usage : <{0}> <cmd>", Args0);
 			return 0;
 		}
-		if (!CreateProcessAsUser(hToken, null, cmd, ref saProcessAttributes, ref saThreadAttributes, false, (uint)(0|0x00000400)/*CREATE_UNICODE_ENVIRONMENT*/, lpEnvironment, null, ref startupInfo, out processInfo))
+		if (!CreateProcessAsUser(hToken, null, cmd, ref saProcessAttributes, ref saThreadAttributes, false, (uint)0x00000400/*CREATE_UNICODE_ENVIRONMENT*/, lpEnvironment, null, ref startupInfo, out processInfo))
 		{
 			Console.WriteLine("CreateProcessAsUser failed ! GGWP");
 		}
