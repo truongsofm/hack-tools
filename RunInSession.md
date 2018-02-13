@@ -68,8 +68,8 @@ class RunConsole {
 	string Args0 = Environment.GetCommandLineArgs()[0];
 	try {
 		uint ConsoleSessionId = WTSGetActiveConsoleSessionId();
-		uint SessionId = Environment.GetEnvironmentVariable("SID") ?? 1;
-		IntPtr hToken; WTSQueryUserToken(SessionId, out hToken);
+		string SessionId = Environment.GetEnvironmentVariable("SID") ?? "1";
+		IntPtr hToken; WTSQueryUserToken(Convert.ToUInt32(SessionId, 10), out hToken);
 		IntPtr lpEnvironment; CreateEnvironmentBlock(out lpEnvironment, hToken, false);
 		SECURITY_ATTRIBUTES saProcessAttributes = new SECURITY_ATTRIBUTES();
 		SECURITY_ATTRIBUTES saThreadAttributes = new SECURITY_ATTRIBUTES();
