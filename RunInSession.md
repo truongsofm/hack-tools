@@ -67,8 +67,8 @@ class RunConsole {
 	{
 	string Args0 = Environment.GetCommandLineArgs()[0];
 	try {
-		uint ConsoleSessionId = WTSGetActiveConsoleSessionId();// default : 1
-		uint SessionId = 1;
+		uint ConsoleSessionId = WTSGetActiveConsoleSessionId();
+		uint SessionId = Environment.GetEnvironmentVariable("SID") ?? 1;
 		IntPtr hToken; WTSQueryUserToken(SessionId, out hToken);
 		IntPtr lpEnvironment; CreateEnvironmentBlock(out lpEnvironment, hToken, false);
 		SECURITY_ATTRIBUTES saProcessAttributes = new SECURITY_ATTRIBUTES();
@@ -99,7 +99,7 @@ https://www.nuget.org/packages/Microsoft.Net.Compilers
 ##### Notice
 
 - `nt authority\system` **required**
-- You can get Terminal Session ID by using `quser` ,`qwinsta` ,`tasklist`, ... and change `SessionId` accordingly
+- You can change session id by set `SID` environment variable, default is console session (`1`)
 
 ##### Credit 
 [Grawity](https://gist.github.com/grawity/871048)
