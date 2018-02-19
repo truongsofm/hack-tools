@@ -1,6 +1,6 @@
 # hack-tools
 
-- [**RunInSession**](https://github.com/du0ngpv/hack-tools/blob/master/RunInSession.md) Run command in other Windows Terminal Session (`nt authority\system` required) (C#)
+- [**RunInSession**](https://github.com/du0ngpv/hack-tools/blob/master/RunInSession.md) Run command in other Windows Terminal Session (`nt authority\system` required) (C & C#)
 - [**PrtSc**](https://github.com/du0ngpv/hack-tools/blob/master/PrtSc.ps1) Screenshot tool (Powershell)
 
 #### Dll injection | RunPE
