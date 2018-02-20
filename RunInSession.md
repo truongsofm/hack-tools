@@ -36,10 +36,12 @@ void main(int argc, char* argv[]){
 	printf("PID : %d", pi.dwProcessId);
 }
 ```
-##### Notice
-
+##### NOTE
 - `nt authority\system` **required**
 - You can change session id by set `SID` environment variable, default is 1 (`console session`)
+
+##### TODO
+- [ ] redirect stdout & stderr from child process to parent process
 
 ##### Credit 
 [Grawity](https://gist.github.com/grawity/871048)
