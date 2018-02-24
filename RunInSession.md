@@ -14,26 +14,27 @@ Compiler : [**Visual C++ 2015 Build Tools**](http://landinghub.visualstudio.com/
 #pragma comment(lib, "advapi32.lib")
 
 void main(int argc, char* argv[]){
+	HANDLE rh, wh, t = NULL;
+	char cmd[512],buffer[257]; DWORD n;
 	char* sessionId = getenv("SID");
 	if(sessionId==NULL){sessionId="1";}
-	if(argc<2){printf("SYNOPSIS : %s [cmd]", argv[0]);exit(0);}
-	HANDLE t = NULL;
-	LPVOID eb = NULL; 
+	if(argc<2){printf("SYNOPSIS : %s [cmd]", argv[0]);return;}
+	SECURITY_ATTRIBUTES sa = {sizeof(SECURITY_ATTRIBUTES), NULL, TRUE}; 
+	STARTUPINFO si = {0};si.cb = sizeof(STARTUPINFO);si.dwFlags = STARTF_USESTDHANDLES;
 	PROCESS_INFORMATION pi = {0};
-	STARTUPINFO si = {0};
-	char cmd[512];
+	if(!CreatePipe(&rh,&wh,&sa,0)){printf("CreatePipe failed !\n");return;}
+	if(!WTSQueryUserToken(1, &t)){printf("WTSQueryUserToken failed !\n");return;}
+	si.hStdOutput = wh;
+	si.hStdError = wh;
 	strncpy (cmd, GetCommandLine()+strlen(argv[0])+2, sizeof(cmd));
-	if(!WTSQueryUserToken(atoi(sessionId), &t)){
-		printf("WTSQueryUserToken failed!");exit(1);
+	if(!CreateProcessAsUser(t, NULL, cmd, NULL, NULL, TRUE, CREATE_NO_WINDOW, 0, NULL, &si, &pi)){printf("CreateProcessAsUser failed !");return;}
+	printf("ProcessId : %d\n", pi.dwProcessId);
+	CloseHandle(wh);
+	WaitForSingleObject( pi.hProcess, INFINITE );
+	while(TRUE){
+        if (!ReadFile(rh, buffer, 256, &n, NULL)){break;}
+        if (n>0){buffer[n]='\0';printf("%s", buffer);}
 	}
-	if(!CreateEnvironmentBlock(&eb, t, FALSE)){
-		printf("CreateEnvironmentBlock failed!");exit(1);
-	}
-	if (!CreateProcessAsUser(t, NULL, cmd, NULL, NULL, FALSE, CREATE_UNICODE_ENVIRONMENT, eb, NULL, &si, &pi))
-	{
-		printf("CreateProcessAsUser failed!");exit(1);
-	}
-	printf("PID : %d", pi.dwProcessId);
 }
 ```
 ##### NOTE
@@ -41,7 +42,7 @@ void main(int argc, char* argv[]){
 - You can change session id by set `SID` environment variable, default is 1 (`console session`)
 
 ##### TODO
-- [ ] redirect stdout & stderr from child process to parent process
+- [x] redirect stdout & stderr from child process
 
 ##### Credit 
 [Grawity](https://gist.github.com/grawity/871048)
