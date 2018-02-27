@@ -1,3 +1,4 @@
+/* https://blog.mozilla.org/ted/2009/02/05/command-line-screenshot-tool-for-windows/ */
 /*
  * Copyright (c) 2009, The Mozilla Foundation
  * All rights reserved.
