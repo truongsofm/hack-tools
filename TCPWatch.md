@@ -1,3 +1,4 @@
+```python
 #!/usr/bin/python3
 import socket
 import sys
@@ -34,3 +35,8 @@ _thread.start_new_thread(server, (['127.0.0.1', 8181, '127.0.0.1', 80],))
 print("@"*80)
 while True:
 	time.sleep(60)
+```
+
+### Forward TCP traffic from local port to an other TCP socket server and watch transfered data
+### Credit
+- [vinodpandey](https://github.com/vinodpandey/python-port-forward)
