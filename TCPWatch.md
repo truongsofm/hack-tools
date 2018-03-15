@@ -1,3 +1,5 @@
+Forward TCP traffic (**port forward**) from local port to an other TCP socket server and display transfered data
+
 ```python
 #!/usr/bin/python3
 import socket
@@ -37,6 +39,5 @@ while True:
 	time.sleep(60)
 ```
 
-### Forward TCP traffic from local port to an other TCP socket server and watch transfered data
 ### Credit
 - [vinodpandey](https://github.com/vinodpandey/python-port-forward)
