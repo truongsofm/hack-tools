@@ -9,3 +9,7 @@
 #### Pass the hash
 - [mimikatz](https://github.com/gentilkiwi/mimikatz) 
 - [Windows Credentials Editor (WCE)](https://www.ampliasecurity.com/research/windows-credentials-editor/)
+
+#### HTTP tunnel
+- [reGeorg](https://github.com/sensepost/reGeorg)
+- [http-tunnel](http-tunnel.sourceforge.net)
