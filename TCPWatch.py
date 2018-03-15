@@ -30,7 +30,7 @@ def forwarder(source, destination, direction):
             source.shutdown(socket.SHUT_RD)
             destination.shutdown(socket.SHUT_WR)
 
-_thread.start_new_thread(server, (['127.0.0.1', 8181, '195.201.88.238', 80],))
+_thread.start_new_thread(server, (['127.0.0.1', 8181, '127.0.0.1', 80],))
 print("@"*80)
 while True:
 	time.sleep(60)
