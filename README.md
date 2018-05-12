@@ -11,7 +11,7 @@
 - [Windows Credentials Editor (WCE)](https://www.ampliasecurity.com/research/windows-credentials-editor/)
 
 #### UAC bypass
-
+- [UACME](https://github.com/hfiref0x/UACME)
 
 #### HTTP tunnel
 - [reGeorg](https://github.com/sensepost/reGeorg)
