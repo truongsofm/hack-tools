@@ -1,4 +1,4 @@
-// convert ( and encrypt ) binary file to C++ array
+// write ( encrypted ) binary file to stdout
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -9,7 +9,7 @@ void main(int argc, char * argv[]){
         return;
     }
     srand( (unsigned) time(NULL) );  
-    const int XOR_KEY_SIZE = 16;
+    const int XOR_KEY_SIZE = 256;
     char * XOR_KEY = new char[XOR_KEY_SIZE];
     printf("#define XOR_KEY_SIZE %d\n", XOR_KEY_SIZE);
     printf("#define XOR_KEY \"");
