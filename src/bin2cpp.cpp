@@ -32,7 +32,7 @@ void main(int argc, char * argv[]){
     }
     f.close();
     printf("\n};\n");
-    printf("int pe_size = %d;\n", pe_size);
+    // printf("int pe_size = %d;\n", pe_size);
     return;
     // for(int i=0; i<pe_size; i++){
     //     pe_byte[i] =  pe_byte[i]^(int)XOR_KEY[i%XOR_KEY_SIZE];
