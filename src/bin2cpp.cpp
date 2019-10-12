@@ -27,7 +27,7 @@ void main(int argc, char * argv[]){
     while (f.get(c)) {
         if(pe_size!=0) printf(",");
         if((pe_size)%XOR_KEY_SIZE==0) putchar('\n');
-        printf("%4d", c^XOR_KEY[pe_size%XOR_KEY_SIZE]);
+        printf("%4d", c^_rotl8(XOR_KEY[pe_size%XOR_KEY_SIZE], pe_size%8));
         pe_size++;
     }
     f.close();
@@ -35,6 +35,6 @@ void main(int argc, char * argv[]){
     // printf("int pe_size = %d;\n", pe_size);
     return;
     // for(int i=0; i<pe_size; i++){
-    //     pe_byte[i] =  pe_byte[i]^(int)XOR_KEY[i%XOR_KEY_SIZE];
+    //    pe_byte[i] =  pe_byte[i]^(int)(_rotr8(XOR_KEY[i%XOR_KEY_SIZE], 8-i%8));
     // }
 }
