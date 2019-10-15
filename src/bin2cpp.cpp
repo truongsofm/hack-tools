@@ -27,7 +27,7 @@ void main(int argc, char * argv[]){
     while (f.get(c)) {
         if(pe_size!=0) printf(",");
         if((pe_size)%XOR_KEY_SIZE==0) putchar('\n');
-        printf("%4d", c^_rotl8(XOR_KEY[pe_size%XOR_KEY_SIZE], pe_size%8));
+        printf("%4d", _rotl8(c^_rotl8(XOR_KEY[pe_size%XOR_KEY_SIZE], pe_size%8), pe_size%8));
         pe_size++;
     }
     f.close();
