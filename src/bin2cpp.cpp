@@ -35,6 +35,6 @@ void main(int argc, char * argv[]){
     // printf("int pe_size = %d;\n", pe_size);
     return;
     // for(int i=0; i<pe_size; i++){
-    //    pe_byte[i] =  pe_byte[i]^(int)(_rotr8(XOR_KEY[i%XOR_KEY_SIZE], 8-i%8));
+    //    pe_byte[i] =  _rotr8(pe_byte[i], i%8)^(_rotr8(XOR_KEY[i%XOR_KEY_SIZE], 8-i%8));
     // }
 }
