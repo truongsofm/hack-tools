@@ -4,7 +4,7 @@
 - [**PrtSc**](https://github.com/du0ngpv/hack-tools/blob/master/src/prtsc.cpp) Screenshot tool (C++)
 
 #### Dll injection | RunPE
-[PowerSploit](https://github.com/PowerShellMafia/PowerSploit/blob/master/CodeExecution/)
+- [PowerSploit](https://github.com/PowerShellMafia/PowerSploit/blob/master/CodeExecution/)
 
 #### Pass the hash
 - [mimikatz](https://github.com/gentilkiwi/mimikatz) 
@@ -19,3 +19,7 @@
 
 #### TCP / UDP Tunneling
 - [SSF](https://securesocketfunneling.github.io/ssf/#how-to-configure)
+
+#### Credentials harvesting
+- [chrome_v80.py](https://github.com/du0ngpv/hack-tools/blob/master/src/chrome_v80.py) Decrypt chrome `Cookies` and `Login Data` ( tested on chrome `79` and `80` )
+
